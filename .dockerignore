@@ -1,0 +1,6 @@
+.github
+.editorconfig
+.gitignore
+LICENSE
+*.md
+config.example.json
