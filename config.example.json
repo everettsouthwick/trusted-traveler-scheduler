@@ -1,5 +1,7 @@
 {
-    "notification_urls": "",
+    "location_ids": ["5140"],
+    "notification_urls": ["discord://id/token"],
     "notification_level": 1,
     "retrieval_interval": 24
-}
+  }
+  

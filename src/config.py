@@ -3,10 +3,10 @@ import os
 import sys
 from typing import Any, Dict
 
-from .general import NotificationLevel
+from .notification_level import NotificationLevel
 
 CONFIG_FILE_NAME = "config.json"
-
+LOCATION_FILE_NAME = "locations.json"
 
 class Config:
     def __init__(self):
@@ -15,9 +15,11 @@ class Config:
         self.notification_urls = []
         self.notification_level = NotificationLevel.INFO
         self.retrieval_interval = 24
+        self.locations = []
        
         # Read the config file
         config = self._get_config()
+        self.locations = self._get_locations()
 
         # Set the configuration values if provided
         try:
@@ -39,6 +41,19 @@ class Config:
             pass
 
         return config
+    
+    def _get_locations(self):
+        project_dir = os.path.dirname(os.path.dirname(__file__))
+        locations_file = project_dir + "/util/" + LOCATION_FILE_NAME
+
+        locations = {}
+        try:
+            with open(locations_file, encoding="utf-8") as file:
+                locations = json.load(file)
+        except FileNotFoundError:
+            pass
+
+        return locations
 
     # This method ensures the configuration values are correct and the right types.
     # Defaults are already set in the constructor to ensure a value is never null.
@@ -46,15 +61,15 @@ class Config:
         if "location_ids" in config:
             self.location_ids = config["location_ids"]
 
-            if not isinstance(self.location_ids, (list, int)):
-                raise TypeError("'location_ids' must be a list or integer")
+            if not isinstance(self.location_ids, (list, str)):
+                raise TypeError("'location_ids' must be a list or string")
 
         if "notification_urls" in config:
             self.notification_urls = config["notification_urls"]
 
             if not isinstance(self.notification_urls, (list, str)):
                 raise TypeError("'notification_urls' must be a list or string")
-
+            
         if "notification_level" in config:
             self.notification_level = config["notification_level"]
 
