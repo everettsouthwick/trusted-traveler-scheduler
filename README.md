@@ -36,6 +36,10 @@ For the complete help documentation, run:
 python trusted-traveler-scheduler.py --help
 ```
 
+## Locations
+
+For information on how to set up the configuration for locations, see [LOCATIONS.md](LOCATIONS.md)
+
 ## Credits
 
 - [Drewster727][2] for their work on [goes-notify][3] which served as a starting point for the logic of pulling the schedule from the Trusted Traveler Program API.
