@@ -2,7 +2,7 @@
 
 import sys
 from typing import List
-from src.config import Config
+from .config import Config
 from multiprocessing import Process
 import apprise
 
@@ -52,15 +52,15 @@ def set_up_locations(config: Config) -> None:
     for location_id in config.location_ids:
         schedule_retriever = ScheduleRetriever(config)
 
-        # Start each flight in a separate process to run them in parallel
+        # Start each location in a separate process to run them in parallel
         process = Process(
-            target=schedule_retriever.get_schedule,
+            target=schedule_retriever.monitor_location,
             args=(location_id,),
         )
         process.start()
 
 def set_up(arguments: List[str]):
-    """Initialize a specific Flight Retriever based on the arguments passed in"""
+    """Initialize a specific Schedule Retriever based on the arguments passed in"""
 
     # Imported here to avoid needing dependencies to retrieve the script's
     # version or usage

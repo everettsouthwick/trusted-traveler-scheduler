@@ -1,15 +1,16 @@
-import sys
 import time
 
-from src.notifcation_handler import NotificationHandler
+from typing import List
+
+from .schedule import Schedule
+
+from .notifcation_handler import NotificationHandler
 import requests
-import apprise
 from datetime import datetime
-from typing import Any, Dict, List
 
 from .config import Config
 
-GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=3&locationId={0}&minimum=1'
+GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=250&locationId={0}&minimum=1'
 
 class ScheduleRetriever:
     """
@@ -19,30 +20,54 @@ class ScheduleRetriever:
     def __init__(self, config: Config) -> None:
         self.config = config
         self.notification_handler = NotificationHandler(self)
-        # self.checkin_scheduler = CheckInScheduler(self)
 
-    def get_schedule(self, location_id: str) -> None:
-        try:
-            # obtain the json from the web url
-            data = requests.get(GOES_URL_FORMAT.format(location_id)).json()
+    def _evaluate_timestamp(self, schedule: List[Schedule], timestamp: str):
+        parsed_date = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M')
 
-            # parse the json
-            if not data:
-                return
-
-            current_apt = datetime.strptime('December 31, 2023', '%B %d, %Y')
-            dates = []
-            for o in data:
-                if o['active']:
-                    dt = o['startTimestamp'] #2017-12-22T15:15
-                    dtp = datetime.strptime(dt, '%Y-%m-%dT%H:%M')
-                    if current_apt > dtp:
-                        dates.append(dtp.strftime('%A, %B %d @ %I:%M%p').encode('utf-8'))
-
-            if not dates:
-                return
+        for dates in schedule:
+            if dates.appointment_date.date() == parsed_date.date():
+                dates.appointment_times.append(parsed_date)
+                return schedule
         
+        if self.config.current_appointment_date is None or self.config.current_appointment_date > parsed_date:
+            schedule.append(Schedule(parsed_date, [parsed_date]))
+
+        return schedule
+
+    def _get_schedule(self, location_id: str) -> None:
+        try:
+            appointments = requests.get(GOES_URL_FORMAT.format(location_id)).json()
+
+            if not appointments:
+                return
+            
+            schedule = []
+            for appointment in appointments:
+                if appointment['active']:
+                    schedule = self._evaluate_timestamp(schedule, appointment['startTimestamp'])
+
+            if not schedule:
+                return
+            
+            self.notification_handler.new_appointment(location_id, schedule)
+            
         except OSError:
             return
         
-        self.notification_handler.new_appointment(location_id, dates)
+    def monitor_location(self, location_id: str) -> None:
+            if self.config.retrieval_interval == 0:
+                return
+            
+            # Convert hours to seconds
+            retrieval_interval = self.config.retrieval_interval * 60 * 60
+
+            while True:
+                time_before = datetime.utcnow()
+
+                self._get_schedule(location_id)
+
+                # Account for the time it takes to retrieve the location when
+                # deciding how long to sleep
+                time_after = datetime.utcnow()
+                time_taken = (time_after - time_before).total_seconds()
+                time.sleep(retrieval_interval - time_taken)

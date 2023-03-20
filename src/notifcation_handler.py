@@ -1,17 +1,15 @@
 from __future__ import annotations
-import datetime
-import json
+from datetime import datetime
 
-from typing import TYPE_CHECKING, Any, Dict, List
+from typing import TYPE_CHECKING, List
 
 import apprise
+from .schedule import Schedule
 
 from .notification_level import NotificationLevel
 
 if TYPE_CHECKING:  # pragma: no cover
     from .schedule_retriever import ScheduleRetriever
-
-MANUAL_CHECKIN_URL = "https://mobile.southwest.com/check-in"
 
 
 class NotificationHandler:
@@ -40,13 +38,20 @@ class NotificationHandler:
         apobj = apprise.Apprise(self.notification_urls)
         apobj.notify(title=title, body=body, body_format=apprise.NotifyFormat.TEXT)
 
-    def new_appointment(self, location_id: str, dates: List) -> None:
-        # Don't send notifications if no new flights are scheduled
-        if len(dates) == 0:
+    def new_appointment(self, location_id: str, appointments: List[Schedule]) -> None:
+        # Don't send notifications if no appointments are available
+        if len(appointments) == 0:
             return
 
-        appointment_message = f"New appointment(s) found for the following location {self._get_location_name(location_id)}\n"
-        for date in dates:
-                appointment_message += f"Appointment at {date}\n"
+        appointment_message = f"New appointment(s) found for {self._get_location_name(location_id)}\n"
+        for appointment in appointments:
+                limited_times = appointment.appointment_times[:3]
+                time_strings = [item.time().strftime('%I:%M %p') for item in limited_times]
+                times = ", ".join(time_strings)
+
+                if len(appointment.appointment_times) > 3:
+                    times += f', and {len(appointment.appointment_times) - 3} more.'
+
+                appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%A, %B %d, %Y')} [{times}]\n"
 
         self.send_notification(appointment_message, NotificationLevel.INFO)
