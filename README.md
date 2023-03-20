@@ -28,12 +28,12 @@ pip install -r requirements.txt
 ## Using the Script
 To monitor a location, run the following command:
 ```shell
-python3 trusted-traveler-scheduler.py LOCATION_ID LOCATION_ID ...
+python3 ttp.py LOCATION_ID LOCATION_ID ...
 ```
 
 For the complete help documentation, run:
 ```shell
-python trusted-traveler-scheduler.py --help
+python ttp.py --help
 ```
 
 ## Locations

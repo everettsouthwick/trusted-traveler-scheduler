@@ -50,7 +50,7 @@ class NotificationHandler:
                 times = ", ".join(time_strings)
 
                 if len(appointment.appointment_times) > 3:
-                    times += f', and {len(appointment.appointment_times) - 3} more.'
+                    times += f', and {len(appointment.appointment_times) - 3} more'
 
                 appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%A, %B %d, %Y')} [{times}]\n"
 

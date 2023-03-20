@@ -2,9 +2,10 @@ FROM python:alpine
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Needed for python to show logs in all processes
+ENV PYTHONUNBUFFERED 1
 
 COPY . .
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["python3", "trusted-traveler-scheduler.py"]
+ENTRYPOINT ["python3", "ttp.py"]
