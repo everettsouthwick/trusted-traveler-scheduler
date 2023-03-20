@@ -1,6 +1,6 @@
 # Trusted Traveler Scheduler
 
-Running this script will automatically check configured location(s) for new appointments.
+Running this script will automatically check configured location(s) for new appointments for Global Entry, NEXUS, SENTRI, and FAST.
 
 ## Table of Contents
 - [Installation](#installation)
