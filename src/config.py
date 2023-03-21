@@ -90,9 +90,3 @@ class Config:
 
             if not isinstance(self.retrieval_interval, int):
                 raise TypeError("'retrieval_interval' must be an integer")
-
-            if self.retrieval_interval < 1:
-                print(
-                    f"Setting 'retrieval_interval' to one as {self.retrieval_interval} hours is too low"
-                )
-                self.retrieval_interval = 1

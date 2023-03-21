@@ -56,6 +56,7 @@ class ScheduleRetriever:
         
     def monitor_location(self, location_id: str) -> None:
             if self.config.retrieval_interval == 0:
+                self._get_schedule(location_id)
                 return
             
             # Convert hours to seconds
