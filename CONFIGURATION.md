@@ -1,8 +1,6 @@
 # Configuration
 This guide contains all the information you need to configure `trusted-traveler-scheduler` to your specifications. An example file of the configuration can be found at [config.example.json](config.example.json).
 
-[TOC]
-
 ## Current Appointment Date
 
 Default: None
