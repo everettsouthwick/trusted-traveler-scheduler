@@ -1,3 +1,5 @@
+# Locations
+
 This list may be incomplete or inaccurate. For the most current information, you must use the API:
 
 - [Global Entry Enrollment Centers][0]
@@ -134,8 +136,8 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 9260  | West Palm Beach Enrollment Center - West Palm Beach Enrollment Center 1 East 11th Street Third Floor Riviera Beach                    |
 | 5029  | Winnipeg Enrollment Center - 1970 Winnipeg NEXUS Office Wellington Room 1074 Winnipeg MB R3H0E3 CA                                    |
 
-[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry
-[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS
-[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI
-[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST
-[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST
+[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry	"Global Entry"
+[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS	"NEXUS"
+[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI	"SENTRI"
+[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST	"US/Mexico FAST"
+[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST	"US/Canada FAST"

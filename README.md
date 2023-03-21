@@ -1,53 +1,90 @@
 # Trusted Traveler Scheduler
 
-Running this script will automatically check configured location(s) for new appointments for Global Entry, NEXUS, SENTRI, and FAST.
+This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
 
-## Table of Contents
-- [Installation](#installation)
-    * [Pre-requisites](#pre-requisites)
-- [Using the Script](#using-the-script)
-- [Credits](#credits)
+[TOC]
 
 ## Installation
 
-### Pre-requisities
+### Prerequisites
 
 - [Python 3.7+][0]
 - [Pip][1]
 
-First, download the script onto your computer
+1. First download the script to your machine and enter into the resulting directory:
+
 ```shell
 git clone https://github.com/everettsouthwick/trusted-traveler-scheduler.git
 cd trusted-traveler-scheduler
 ```
-Then, install the needed packages for the script
+2. Then install the required packages to run the script:
+
 ```shell
 pip install -r requirements.txt
 ```
 
-## Using the Script
-To monitor a location, run the following command:
+## Usage
+To use the script, run the following command with a space separated `LOCATION_ID` list of locations you would like to monitor:
 ```shell
-python3 trusted-traveler-scheduler.py LOCATION_ID LOCATION_ID ...
+python ttp.py LOCATION_ID LOCATION_ID ...
 ```
 
-For the complete help documentation, run:
+For complete documentation, you can use the following command:
 ```shell
-python trusted-traveler-scheduler.py --help
+python ttp.py --help
 ```
 
-## Locations
+### Docker
 
-For information on how to set up the configuration for locations, see [LOCATIONS.md](LOCATIONS.md)
+#### Pulling the image
+
+The script can be configured to run in [Docker][2]. You can pull the latest container image from the [Docker repository][3] by running the following command:
+
+```shell
+docker pull ecsouthwick/trusted-traveler-scheduler
+```
+To pull the develop branch from the Docker repository, add the `:develop` tag to the above command:
+
+```shell
+docker pull ecsouthwick/trusted-traveler-scheduler:develop
+```
+
+#### Running the Container
+
+Once you have pulled the image from docker, you may use the following command to run the container:
+
+```shell
+docker run -d ecsouthwick/trusted-traveler-scheduler LOCATION_ID LOCATION_ID ...
+```
+Optionally, you may attach your `config.json` file to the container to utilize your configuration settings.
+
+```shell
+docker run -d ecsouthwick/trusted-traveler-scheduler --volume /path/to/config.json:/app/config.json
+```
+
+**Note**: The recommended restart policy for the container is `on-failed` or `no`.
+
+## Configuration
+
+1. Copy `config.example.json` to `config.json`. 
+2. See [CONFIGURATION.md](CONFIGURATION.md) for detailed instructions on setting up `config.json`.
+
+
+
+**Note**: If you are using Docker and make changes to your `config.json`, you *must* re-build the container to use the updated `config.json`.
+
+### Locations
+
+For information on the list of applicable locations, see [LOCATIONS.md](LOCATIONS.md).
 
 ## Credits
 
-- [Drewster727][2] for their work on [goes-notify][3] which served as a starting point for the logic of pulling the schedule from the Trusted Traveler Program API.
-- [jdholtz][4] for their work on [auto-southwest-check-in][5] which greatly influenced the layout and structure of the project.
+- [Drewster727][4] for their `goes-notify` repository which was used for initial testing of the Trusted Traveler Program API.
+- [jdholtz][5] for their work on `auto-southwest-check-in` which in part influenced the logic and overall structure of this project.
 
-[0]: https://www.python.org/downloads/
-[1]: https://pip.pypa.io/en/stable/installation/
-[2]: https://github.com/Drewster727
-[3]: https://github.com/Drewster727/goes-notify
-[4]: https://github.com/jdholtz
-[5]: https://github.com/jdholtz/auto-southwest-check-in
+[0]: https://www.python.org/downloads/ "Python 3.7+"
+[1]: https://pip.pypa.io/en/stable/installation/	"Pip"
+[2]: https://www.docker.com/	"Docker"
+[3]: https://hub.docker.com/repository/docker/ecsouthwick/trusted-traveler-scheduler/general	"Docker repository"
+[4]: https://github.com/Drewster727	"Drewster727"
+[5]: https://github.com/jdholtz	"jdholtz"

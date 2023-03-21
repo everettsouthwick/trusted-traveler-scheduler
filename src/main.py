@@ -10,7 +10,7 @@ __version__ = "v1.0"
 
 __doc__ = """
 Retrieve schedules from locations:
-    python3 trusted-traveler-scheduler.py LOCATION_ID LOCATION_ID ...
+    python3 ttp.py LOCATION_ID LOCATION_ID ...
 
 Options:
     --test-notifications Test the notification URLs configuration and exit
