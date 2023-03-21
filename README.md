@@ -2,8 +2,6 @@
 
 This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
 
-[TOC]
-
 ## Installation
 
 ### Prerequisites
