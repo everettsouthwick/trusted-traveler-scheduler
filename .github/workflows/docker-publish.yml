@@ -1,4 +1,4 @@
-name: Docker
+name: Docker Publish
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -53,8 +53,8 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
