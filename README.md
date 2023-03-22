@@ -2,8 +2,6 @@
 
 This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
 
-[TOC]
-
 ## Installation
 
 ### Prerequisites
@@ -85,6 +83,6 @@ For information on the list of applicable locations, see [LOCATIONS.md](LOCATION
 [0]: https://www.python.org/downloads/ "Python 3.7+"
 [1]: https://pip.pypa.io/en/stable/installation/	"Pip"
 [2]: https://www.docker.com/	"Docker"
-[3]: https://hub.docker.com/repository/docker/ecsouthwick/trusted-traveler-scheduler/general	"Docker repository"
+[3]: https://hub.docker.com/r/ecsouthwick/trusted-traveler-scheduler	"Docker repository"
 [4]: https://github.com/Drewster727	"Drewster727"
 [5]: https://github.com/jdholtz	"jdholtz"
