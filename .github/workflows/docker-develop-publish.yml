@@ -7,11 +7,11 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Publish Docker Image
+name: Publish Develop Docker Image
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "develop" ]
 
 jobs:
   push_to_registry:
