@@ -22,14 +22,14 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-To use the script, run the following command with a space separated `LOCATION_ID` list of locations you would like to monitor:
+To use the script, run the following command:
 ```shell
-python ttp.py LOCATION_ID LOCATION_ID ...
+python ttp.py [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_LEVEL] [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
 ```
 
 For complete documentation, you can use the following command:
 ```shell
-python ttp.py --help
+python ttp.py -h
 ```
 
 ### Docker
@@ -52,7 +52,7 @@ docker pull ecsouthwick/trusted-traveler-scheduler:develop
 Once you have pulled the image from docker, you may use the following command to run the container:
 
 ```shell
-docker run -d ecsouthwick/trusted-traveler-scheduler LOCATION_ID LOCATION_ID ...
+docker run -d ecsouthwick/trusted-traveler-scheduler [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_LEVEL] [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
 ```
 Optionally, you may attach your `config.json` file to the container to utilize your configuration settings.
 
