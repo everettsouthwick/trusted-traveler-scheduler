@@ -34,7 +34,7 @@ class ScheduleRetriever:
 
         return schedule
 
-    def _get_schedule(self, location_id: str) -> None:
+    def _get_schedule(self, location_id: int) -> None:
         try:
             appointments = requests.get(GOES_URL_FORMAT.format(location_id)).json()
 
@@ -54,7 +54,7 @@ class ScheduleRetriever:
         except OSError:
             return
         
-    def monitor_location(self, location_id: str) -> None:
+    def monitor_location(self, location_id: int) -> None:
             if self.config.retrieval_interval == 0:
                 self._get_schedule(location_id)
                 return

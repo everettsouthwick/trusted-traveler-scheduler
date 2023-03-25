@@ -21,8 +21,8 @@ class NotificationHandler:
         self.notification_level = self.schedule_retriever.config.notification_level
         self.locations = self.schedule_retriever.config.locations
 
-    def _get_location_name(self, location_id: str) -> str:
-        result = next((location for location in self.locations if str(location["id"]) == location_id), None)
+    def _get_location_name(self, location_id: int) -> str:
+        result = next((location for location in self.locations if location["id"] == location_id), None)
         return result['name'] if result else ''
 
     def send_notification(self, body: str, level: int = 1) -> None:
@@ -38,7 +38,7 @@ class NotificationHandler:
         apobj = apprise.Apprise(self.notification_urls)
         apobj.notify(title=title, body=body, body_format=apprise.NotifyFormat.TEXT)
 
-    def new_appointment(self, location_id: str, appointments: List[Schedule]) -> None:
+    def new_appointment(self, location_id: int, appointments: List[Schedule]) -> None:
         # Don't send notifications if no appointments are available
         if len(appointments) == 0:
             return
