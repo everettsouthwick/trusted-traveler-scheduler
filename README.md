@@ -28,6 +28,11 @@ python ttp.py [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_L
     [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
 ```
 
+For example, this would fetch all appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 24 hours.
+```shell
+python ttp.py -d "December 31, 2023" -l 5004,5140 -n 1 -u discord://id/token,discord://id/token -r 24
+```
+
 For complete documentation, you can use the following command:
 ```shell
 python ttp.py -h
