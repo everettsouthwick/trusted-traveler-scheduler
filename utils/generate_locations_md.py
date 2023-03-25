@@ -49,20 +49,34 @@ def determine_services(location):
             nexus = True
         elif service['name'] == 'SENTRI':
             sentri = True
-        elif service['name'] == 'Mexico FAST':
+        elif service['name'] == 'U.S. / Mexico FAST':
             mexico_fast = True
-        elif service['name'] == 'Canada FAST':
+        elif service['name'] == 'U.S. / Canada FAST':
             canada_fast = True
         else:
             continue
     return Services(global_entry, nexus, sentri, mexico_fast, canada_fast)
 
 def output_to_markdown(locations):
-    with open('LOCATIONS.md', 'w', encoding='utf-8') as f:
+    with open('../LOCATIONS.md', 'w', encoding='utf-8') as f:
+        f.write('# Locations\n\n')
+        f.write('This list may be incomplete or inaccurate. For the most current information, you must use the API:\n\n')
+        f.write('- [Global Entry Enrollment Centers][0]\n')
+        f.write('- [NEXUS Enrollment Centers][1]\n')
+        f.write('- [SENTRI Enrollment Centers][2]\n')
+        f.write('- [US/Mexico FAST Enrollment Centers][3]\n')
+        f.write('- [US/Canada FAST Enrollment Centers][4]\n\n')
+
         f.write('| Id | Name | Area | Global Entry | NEXUS | SENTRI | Mexico FAST | Canada FAST |\n')
         f.write('| -- | ---- | ---- | ------------ | ----- | ------ | ----------- | ----------- |\n')
         for location in locations:
             f.write(f'| {location.id} | {location.name} | {location.city}, {location.state}, {location.country_code} | {location.services.global_entry} | {location.services.nexus} | {location.services.sentri} | {location.services.mexico_fast} | {location.services.canada_fast} |\n')
+
+        f.write('\n[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry\n')
+        f.write('[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS\n')
+        f.write('[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI\n')
+        f.write('[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST\n')
+        f.write('[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST\n')
 
 def get_locations():
         try:

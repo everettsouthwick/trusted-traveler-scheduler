@@ -10,15 +10,15 @@ This list may be incomplete or inaccurate. For the most current information, you
 
 | Id | Name | Area | Global Entry | NEXUS | SENTRI | Mexico FAST | Canada FAST |
 | -- | ---- | ---- | ------------ | ----- | ------ | ----------- | ----------- |
-| 5001 | Hidalgo Enrollment Center | Mission, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
+| 5001 | Hidalgo Enrollment Center | Mission, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
 | 5002 | Otay Mesa Enrollment Center | San Diego, CA, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
 | 5003 | Brownsville Enrollment Center | Brownsville, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
 | 5004 | Laredo Enrollment Center | Laredo, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
-| 5005 | El Paso Enrollment Center | El Paso, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
+| 5005 | El Paso Enrollment Center | El Paso, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
 | 5006 | Calexico Enrollment Center | Calexico, CA, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
-| 5007 | Nogales, AZ | NOGALES, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
-| 5020 | Blaine NEXUS And FAST Enrollment Center | BLAINE, WA, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5021 | Champlain Enrollment Center | Champlain, NY, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
+| 5007 | Nogales, AZ | NOGALES, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
+| 5020 | Blaine NEXUS And FAST Enrollment Center | BLAINE, WA, US | :x: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5021 | Champlain Enrollment Center | Champlain, NY, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
 | 5022 | Buffalo-Ft. Erie Enrollment Center | Fort Erie, ON, CA | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 5023 | Detroit Enrollment Center Global Entry | Detroit, MI, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5024 | Port Huron Enrollment Center | Port Huron, MI, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
@@ -30,30 +30,30 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 5030 | Calgary Enrollment Center | Calgary, AB, CA | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 5031 | Halifax Enrollment Center | Goffs, NS, CA | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 5032 | Edmonton Enrollment Center | Edmonton, AB, CA | :x: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5060 | Warroad Enrollment Center | Warroad, MN, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5080 | Sault Ste Marie Enrollment Center | Sault Ste. Marie, MI, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5100 | Pembina Enrollment Center | Pembina, ND, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5101 | Houlton POE/Woodstock | Houlton, ME, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5120 | Sweetgrass NEXUS and FAST Enrollment Center | Sweetgrass, MT, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
+| 5060 | Warroad Enrollment Center | Warroad, MN, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5080 | Sault Ste Marie Enrollment Center | Sault Ste. Marie, MI, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5100 | Pembina Enrollment Center | Pembina, ND, US | :x: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5101 | Houlton POE/Woodstock | Houlton, ME, US | :x: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5120 | Sweetgrass NEXUS and FAST Enrollment Center | Sweetgrass, MT, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
 | 5140 | JFK International Global Entry EC | Jamaica, NY, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5141 | Houston Intercontinental Global Entry EC | Houston, TX, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5142 | Washington Dulles International Global Entry EC | Sterling, VA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 5160 | International Falls NEXUS/FAST Enrollment Center | International Falls, MN, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
+| 5160 | International Falls NEXUS/FAST Enrollment Center | International Falls, MN, US | :x: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
 | 5161 | Niagara Falls Enrollment Center | Niagara Falls, NY, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
 | 5180 | Los Angeles International Global Entry EC | LOS ANGELES, CA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5181 | Miami International Airport | Miami, FL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5182 | Atlanta International Global Entry EC | Atlanta, GA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5183 | Chicago O'Hare International Global Entry EC | CHICAGO, IL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 5221 | Portal FAST Enrollment Center | Portal, ND, US | :x: | :x: | :x: | :x: | :x: |
-| 5222 | Otay Mesa FAST Enrollment Center | San Diego, CA, US | :x: | :x: | :x: | :x: | :x: |
-| 5223 | Derby Line Enrollment Center | Derby Line, VT, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5224 | Calexico FAST Enrollment Center | Calexico, CA, US | :x: | :x: | :x: | :x: | :x: |
-| 5225 | Brownsville FAST Enrollment Center | Brownsville, TX, US | :x: | :x: | :x: | :x: | :x: |
-| 5226 | Windsor FAST Enrollment Center | Detroit, MI, US | :x: | :x: | :x: | :x: | :x: |
-| 5227 | Laredo FAST Enrollment Center | Laredo, TX, US | :x: | :x: | :x: | :x: | :x: |
-| 5228 | Ft Erie FAST Enrollment Center | Fort Erie, ON, CA | :x: | :x: | :x: | :x: | :x: |
-| 5229 | Port Huron FAST Enrollment Center | Port Huron, MI, US | :x: | :x: | :x: | :x: | :x: |
-| 5240 | Skagway FAST Enrollment Center | Skagway, AK, US | :x: | :x: | :x: | :x: | :x: |
+| 5221 | Portal FAST Enrollment Center | Portal, ND, US | :x: | :x: | :x: | :x: | :heavy_check_mark: |
+| 5222 | Otay Mesa FAST Enrollment Center | San Diego, CA, US | :x: | :x: | :x: | :heavy_check_mark: | :x: |
+| 5223 | Derby Line Enrollment Center | Derby Line, VT, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5224 | Calexico FAST Enrollment Center | Calexico, CA, US | :x: | :x: | :x: | :heavy_check_mark: | :x: |
+| 5225 | Brownsville FAST Enrollment Center | Brownsville, TX, US | :x: | :x: | :x: | :heavy_check_mark: | :x: |
+| 5226 | Windsor FAST Enrollment Center | Detroit, MI, US | :x: | :x: | :x: | :x: | :heavy_check_mark: |
+| 5227 | Laredo FAST Enrollment Center | Laredo, TX, US | :x: | :x: | :x: | :heavy_check_mark: | :x: |
+| 5228 | Ft Erie FAST Enrollment Center | Fort Erie, ON, CA | :x: | :x: | :x: | :x: | :heavy_check_mark: |
+| 5229 | Port Huron FAST Enrollment Center | Port Huron, MI, US | :x: | :x: | :x: | :x: | :heavy_check_mark: |
+| 5240 | Skagway FAST Enrollment Center | Skagway, AK, US | :x: | :x: | :x: | :x: | :heavy_check_mark: |
 | 5300 | Dallas-Fort Worth International Airport Global Entry | DFW Airport, TX, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5320 | Detroit Metro Airport | Detroit, MI, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5340 | Honolulu Enrollment Center | Honolulu, HI, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
@@ -67,9 +67,9 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 5445 | Philadelphia International Airport | PHILADELPHIA, PA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5446 | San Francisco Global Entry Enrollment Center | San Francisco, CA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 5447 | Sanford Global Entry Enrollment Center | Sanford, FL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 5460 | San Luis Enrollment Center | San Luis, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
-| 5500 | Calais Enrollment Center | Calais, ME, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
-| 5520 | Lansdowne, ON | Lansdowne, ON, CA | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: |
+| 5460 | San Luis Enrollment Center | San Luis, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
+| 5500 | Calais Enrollment Center | Calais, ME, US | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
+| 5520 | Lansdowne, ON | Lansdowne, ON, CA | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
 | 6480 | U.s. Custom House - Bowling Green | NEW YORK, NY, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 6840 | Minneapolis - St. Paul Global Entry EC | St. Paul, MN, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 6920 | Doha International Airport | Doha, , QA | :heavy_check_mark: | :x: | :x: | :x: | :x: |
@@ -86,7 +86,7 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 7960 | Portland, OR Enrollment Center | Portland, OR, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 8020 | Tampa Enrollment Center | Tampa, FL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 8040 | Albuquerque Enrollment Center | Albuquerque, NM, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
-| 8100 | Douglas Enrollment Center | Douglas, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
+| 8100 | Douglas Enrollment Center | Douglas, AZ, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
 | 8120 | Washington, DC Enrollment Center | Washington, DC, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 8920 | Los Angeles -Long Beach Seaport | Long Beach, CA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 9040 | Singapore (Singapore, U.S. Embassy) | Singapore, , SG | :heavy_check_mark: | :x: | :x: | :x: | :x: |
@@ -116,11 +116,11 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 14681 | Bradley International Airport Enrollment Center | Windsor Locks, CT, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 14981 | Richmond, VA Enrollment Center | Richmond, VA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 15221 | Pembina Global Entry Enrollment Center | Pembina, ND, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 16226 | Eagle Pass | Eagle Pass, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
+| 16226 | Eagle Pass | Eagle Pass, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: |
 | 16242 | Dayton Enrollment Center | Vandalia, OH, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16248 | Treasure Coast International Airport | Fort Pierce, FL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16251 | Sweetgrass Global Entry Enrollment Center | Sweetgrass, MT, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 16256 | Alcan FAST-North Enrollment Center | Alcan, AK, US | :x: | :x: | :x: | :x: | :x: |
+| 16256 | Alcan FAST-North Enrollment Center | Alcan, AK, US | :x: | :x: | :x: | :x: | :heavy_check_mark: |
 | 16271 | Tri-cities Enrollment Center | Blountville, TN, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16277 | Huntsville Global Entry Enrollment Center | Huntsville, AL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16278 | South Bend Enrollment Center | South Bend, IN, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
@@ -135,7 +135,7 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 16482 | Grand Forks, ND Enrollment Event | Grand Forks, ND, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16485 | SEAFO - Billings-Logan Airport GE Mobile Event | Billings, MT, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16488 | SEAFO - Missoula International Airport | Missoula, MT, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-| 16502 | DETFO - Detroit FAST Event | Detroit, MI, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
+| 16502 | DETFO - Detroit FAST Event | Detroit, MI, US | :x: | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: |
 | 16511 | Detroit Enrollment Center NEXUS | Detroit, MI, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 16515 | Fort Lauderdale International Airport Terminal | Fort Lauderdale, FL, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16519 | Champlain GE Only | Champlain, NY, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
@@ -143,8 +143,8 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 16546 | Ogdensburg Enrollment Center | Ogdensburg, NY, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 16547 | San Diego International Airport EC | San Diego, CA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 
-[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry	"Global Entry"
-[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS	"NEXUS"
-[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI	"SENTRI"
-[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST	"US/Mexico FAST"
-[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST	"US/Canada FAST"
+[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry
+[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS
+[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI
+[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST
+[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST
