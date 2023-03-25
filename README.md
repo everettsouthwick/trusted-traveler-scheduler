@@ -53,8 +53,8 @@ docker pull ecsouthwick/trusted-traveler-scheduler:develop
 Once you have pulled the image from docker, you may use the following command to run the container:
 
 ```shell
-docker run -d ecsouthwick/trusted-traveler-scheduler [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_LEVEL] 
-    [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
+docker run -d ecsouthwick/trusted-traveler-scheduler [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] 
+    [-n NOTIFICATION_LEVEL] [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
 ```
 Optionally, you may attach your `config.json` file to the container to utilize your configuration settings.
 
