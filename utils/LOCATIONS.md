@@ -1,13 +1,3 @@
-# Locations
-
-This list may be incomplete or inaccurate. For the most current information, you must use the API:
-
-- [Global Entry Enrollment Centers][0]
-- [NEXUS Enrollment Centers][1]
-- [SENTRI Enrollment Centers][2]
-- [US/Mexico FAST Enrollment Centers][3]
-- [US/Canada FAST Enrollment Centers][4]
-
 | Id | Name | Area | Global Entry | NEXUS | SENTRI | Mexico FAST | Canada FAST |
 | -- | ---- | ---- | ------------ | ----- | ------ | ----------- | ----------- |
 | 5001 | Hidalgo Enrollment Center | Mission, TX, US | :heavy_check_mark: | :x: | :heavy_check_mark: | :x: | :x: |
@@ -142,9 +132,3 @@ This list may be incomplete or inaccurate. For the most current information, you
 | 16520 | Niagara Falls GE Only | Niagara Falls, NY, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
 | 16546 | Ogdensburg Enrollment Center | Ogdensburg, NY, US | :x: | :heavy_check_mark: | :x: | :x: | :x: |
 | 16547 | San Diego International Airport EC | San Diego, CA, US | :heavy_check_mark: | :x: | :x: | :x: | :x: |
-
-[0]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=Global%20Entry	"Global Entry"
-[1]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=NEXUS	"NEXUS"
-[2]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=SENTRI	"SENTRI"
-[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST	"US/Mexico FAST"
-[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST	"US/Canada FAST"

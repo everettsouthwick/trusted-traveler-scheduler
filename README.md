@@ -2,6 +2,17 @@
 
 This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
 
+## Table of Contents
+* [Installation](#installation)
+    * [Prerequisites](#prerequisites)
+* [Usage](#usage)
+    * [Docker](#docker)
+        * [Pulling the image](#pulling-the-image)
+        * [Running the Container](#running-the-container)
+- [Configuration](#configuration)
+    - [Locations](#locations)
+- [Credits](#credits)
+
 ## Installation
 
 ### Prerequisites
@@ -27,6 +38,7 @@ To use the script, run the following command:
 python ttp.py [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_LEVEL] 
     [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
 ```
+All of the arguments are optional, and will take precedence over the values supplied in `config.json`, with the exception of `location_ids` and `notification_urls` which will merge the values into a single list.
 
 For example, the following command would retrieve appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 24 hours:
 ```shell

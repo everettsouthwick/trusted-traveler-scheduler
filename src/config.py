@@ -70,8 +70,8 @@ class Config:
         if "location_ids" in config:
             self.location_ids = config["location_ids"]
 
-            if not isinstance(self.location_ids, (list, str)):
-                raise TypeError("'location_ids' must be a list or string")
+            if not isinstance(self.location_ids, (list, int)):
+                raise TypeError("'location_ids' must be a list or integer")
             
         if "notification_level" in config:
             self.notification_level = config["notification_level"]

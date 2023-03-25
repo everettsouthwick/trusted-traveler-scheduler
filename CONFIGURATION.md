@@ -23,13 +23,13 @@ This above configuration will notify you if a new appointment is found for Decem
 
 Default: []
 
-Type: List or String
+Type: List or Integer
 
-This represents the IDs of the enrollment centers you wish to monitor. This can either be a list of locations, or a singular location represented by a string. This list is used in addition to whatever arguments you pass in at run-time of the script. For more information on locations, please see [LOCATIONS.md](LOCATIONS.MD).
+This represents the IDs of the enrollment centers you wish to monitor. This can either be a list of locations, or a singular location represented by an integer. This list is used in addition to whatever arguments you pass in at run-time of the script. For more information on locations, please see [LOCATIONS.md](LOCATIONS.MD).
 
 ```json
 {
-  "location_ids": ["5140"]
+  "location_ids": [ 5140 ]
 }
 ```
 
@@ -37,7 +37,7 @@ or
 
 ```json
 {  
-    "location_ids": "5140"
+    "location_ids": 5140
 }
 ```
 
