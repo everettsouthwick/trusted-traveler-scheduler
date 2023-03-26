@@ -38,8 +38,8 @@ def add_arguments(parser: argparse.ArgumentParser):
                         help='Comma-separated list of notification URLs in the Apprise format (e.g. discord://id/token,discord://id/token)')
 
     parser.add_argument('-r', '--retrieval-interval',
-                        type=int,
-                        help='Retrieval interval in hours (e.g. 24)')
+                        type=str,
+                        help='Retrieval interval in specified unit (e.g. 5m)')
     
 def config_from_arguments(args):
     if args.current_appointment_date:
@@ -61,7 +61,10 @@ def config_from_arguments(args):
                 config.notification_urls.append(notification_url)
 
     if args.retrieval_interval:
-        config.retrieval_interval = args.retrieval_interval
+        try:
+            config.retrieval_interval = config.convert_to_seconds(args.retrieval_interval)
+        except ValueError as err:
+                raise TypeError(err)
 
     if args.test_notifications:
         schedule_retriever = ScheduleRetriever(config)

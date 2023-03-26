@@ -1,4 +1,5 @@
 import json
+import re
 import os
 import sys
 from typing import Any, Dict
@@ -16,7 +17,7 @@ class Config:
         self.location_ids = []
         self.notification_level = NotificationLevel.INFO
         self.notification_urls = []
-        self.retrieval_interval = 24
+        self.retrieval_interval = 300
        
         # Read the config file
         config = self._get_config()
@@ -55,6 +56,25 @@ class Config:
             pass
 
         return locations
+    
+    def convert_to_seconds(self, time: str) -> int:
+        match = re.match(r'^(\d+)([smhd])$', time.lower())
+        
+        if not match:
+            raise ValueError(f"'retrieval_interval' must be in the format of <integer><unit>. (e.g. 45s (seconds), 30m (minutes), 2h (hours), 1d (days))")
+        
+        value, unit = int(match.group(1)), match.group(2)
+
+        if unit == "s":
+            return value
+        elif unit == "m":
+            return value * 60
+        elif unit == "h":
+            return value * 3600
+        elif unit == "d":
+            return value * 86400
+        else:
+            raise ValueError(f"'retrieval_interval' invalid time unit: {unit}. Accepted units: s (seconds), m (minutes), h (hours), d (days).")
 
     # This method ensures the configuration values are correct and the right types.
     # Defaults are already set in the constructor to ensure a value is never null.
@@ -88,5 +108,12 @@ class Config:
         if "retrieval_interval" in config:
             self.retrieval_interval = config["retrieval_interval"]
 
-            if not isinstance(self.retrieval_interval, int):
-                raise TypeError("'retrieval_interval' must be an integer")
+            if not isinstance(self.retrieval_interval, str):
+                raise TypeError("'retrieval_interval' must be a string")
+            
+            try:
+                self.retrieval_interval = self.convert_to_seconds(self.retrieval_interval)
+            except ValueError as err:
+                raise TypeError(err)
+                
+                

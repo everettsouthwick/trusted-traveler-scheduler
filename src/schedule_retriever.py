@@ -58,9 +58,6 @@ class ScheduleRetriever:
             if self.config.retrieval_interval == 0:
                 self._get_schedule(location_id)
                 return
-            
-            # Convert hours to seconds
-            retrieval_interval = self.config.retrieval_interval * 60 * 60
 
             while True:
                 time_before = datetime.utcnow()
@@ -71,4 +68,4 @@ class ScheduleRetriever:
                 # deciding how long to sleep
                 time_after = datetime.utcnow()
                 time_taken = (time_after - time_before).total_seconds()
-                time.sleep(retrieval_interval - time_taken)
+                time.sleep(self.config.retrieval_interval - time_taken)

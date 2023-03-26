@@ -9,9 +9,9 @@ This script will automatically fetch new appointment dates/times for the configu
     * [Docker](#docker)
         * [Pulling the image](#pulling-the-image)
         * [Running the Container](#running-the-container)
-- [Configuration](#configuration)
-    - [Locations](#locations)
-- [Credits](#credits)
+* [Configuration](#configuration)
+    * [Locations](#locations)
+* [Credits](#credits)
 
 ## Installation
 
@@ -40,9 +40,9 @@ python ttp.py [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_L
 ```
 All of the arguments are optional, and will take precedence over the values supplied in `config.json`, with the exception of `location_ids` and `notification_urls` which will merge the values into a single list.
 
-For example, the following command would retrieve appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 24 hours:
+For example, the following command would retrieve appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 5 minutes:
 ```shell
-python ttp.py -d "December 31, 2023" -l 5004,5140 -n 1 -u discord://id/token,discord://id/token -r 24
+python ttp.py -d "December 31, 2023" -l 5004,5140 -n 1 -u discord://id/token,discord://id/token -r 5m
 ```
 
 For complete documentation, you can use the following command:
