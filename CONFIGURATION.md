@@ -90,15 +90,15 @@ python tty.py --test-notifications
 ```
 
 ## Retrieval Interval
-Default: 24 hours
+Default: 5 minutes
 
-Type: Integer
+Type: String
 
-This indicates how often (in hours) the script will fetch new appointments from the monitored locations. To disable automatic retrieval, set this to 0.
+This indicates how often the script will fetch new appointments from the monitored locations. To disable automatic retrieval, set this to "0m".
 
 ```json
 {
-    "retrieval_interval": 24
+    "retrieval_interval": "5m"
 }
 ```
 

@@ -2,6 +2,6 @@
   "current_appointment_date": "January 1, 2024",
   "location_ids": [ 5140 ],
   "notification_level": 1,
-  "notification_urls": ["discord://id/token"],
-  "retrieval_interval": 24
+  "notification_urls": [ "discord://id/token" ],
+  "retrieval_interval": "5m"
 }
