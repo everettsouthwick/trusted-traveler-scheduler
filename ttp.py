@@ -65,7 +65,6 @@ def config_from_arguments(args):
             config.retrieval_interval = config.convert_to_seconds(args.retrieval_interval)
         except ValueError as err:
                 raise TypeError(err)
-            
 
     if args.test_notifications:
         schedule_retriever = ScheduleRetriever(config)
