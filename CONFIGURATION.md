@@ -1,6 +1,19 @@
 # Configuration
 This guide contains all the information you need to configure `trusted-traveler-scheduler` to your specifications. An example file of the configuration can be found at [config.example.json](config.example.json).
 
+## Table of Contents
+
+- [Current Appointment Date](#current-appointment-date)
+- [Locations](#locations)
+- [Notifications](#notifications)
+  - [Notification Level](#notification-level)
+  - [Notification URLs](#notification-urls)
+  - [Test Notifications](#test-notifications)
+- [Retrieval Interval](#retrieval-interval)
+- [Appointment Times](#appointment-times)
+  - [Start Appointment Time](#start-appointment-time)
+  - [End Appointment Time](#end-appointment-time)
+
 ## Current Appointment Date
 
 Default: None
@@ -25,7 +38,7 @@ Default: []
 
 Type: List or Integer
 
-This represents the IDs of the enrollment centers you wish to monitor. This can either be a list of locations, or a singular location represented by an integer. This list is used in addition to whatever arguments you pass in at run-time of the script. For more information on locations, please see [LOCATIONS.md](LOCATIONS.MD).
+This represents the IDs of the enrollment centers you wish to monitor. This can either be a list of locations, or a singular location represented by an integer. This list is used in addition to whatever arguments you pass in at run-time of the script. For more information on locations, please see [LOCATIONS.md](LOCATIONS.md).
 
 ```json
 {
@@ -36,7 +49,7 @@ This represents the IDs of the enrollment centers you wish to monitor. This can 
 or
 
 ```json
-{  
+{
     "location_ids": 5140
 }
 ```
@@ -86,7 +99,7 @@ or
 ### Test Notifications
 To test your notification configuration, run the following command:
 ```shell
-python tty.py --test-notifications
+python tty.py -t
 ```
 
 ## Retrieval Interval
@@ -101,6 +114,36 @@ This indicates how often the script will fetch new appointments from the monitor
     "retrieval_interval": "5m"
 }
 ```
+
+## Appointment Times
+
+### Start Appointment Time
+Default: 00:00
+
+Type: String
+
+This indicates the earliest appointment you would like to be notified for. To be notified for all appointments, set this to "00:00".
+
+```json
+{
+    "start_appointment_time": "06:00"
+}
+```
+
+### End Appointment Time
+Default: 23:59
+
+Type: String
+
+This indicates the latest appointment you would like to be notified for. To be notified for all appointments, set this to "23:59".
+
+```json
+{
+    "end_appointment_time": "20:00"
+}
+```
+
+
 
 [0]: https://github.com/caronc/apprise
 [1]: https://github.com/caronc/apprise#supported-notifications

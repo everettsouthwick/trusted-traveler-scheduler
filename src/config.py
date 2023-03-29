@@ -18,6 +18,8 @@ class Config:
         self.notification_level = NotificationLevel.INFO
         self.notification_urls = []
         self.retrieval_interval = 300
+        self.start_appointment_time = datetime(year=9999, month=12, day=31, hour=0, minute=0)
+        self.end_appointment_time = datetime(year=9999, month=12, day=31, hour=23, minute=59)
        
         # Read the config file
         config = self._get_config()
@@ -58,6 +60,12 @@ class Config:
         return locations
     
     def convert_to_seconds(self, time: str) -> int:
+        # If the time is already an integer, return it
+        try:
+            return int(time)
+        except:
+            pass
+
         match = re.match(r'^(\d+)([smhd])$', time.lower())
         
         if not match:
@@ -75,6 +83,9 @@ class Config:
             return value * 86400
         else:
             raise ValueError(f"'retrieval_interval' invalid time unit: {unit}. Accepted units: s (seconds), m (minutes), h (hours), d (days).")
+        
+    def convert_to_datetime(self, time: str) -> datetime:
+        return datetime.strptime(time, "%H:%M")
 
     # This method ensures the configuration values are correct and the right types.
     # Defaults are already set in the constructor to ensure a value is never null.
@@ -115,5 +126,27 @@ class Config:
                 self.retrieval_interval = self.convert_to_seconds(self.retrieval_interval)
             except ValueError as err:
                 raise TypeError(err)
-                
-                
+        
+        if "start_appointment_time" in config:
+            self.start_appointment_time = config["start_appointment_time"]
+
+            if not isinstance(self.start_appointment_time, str):
+                raise TypeError("'start_appointment_time' must be a string")
+            
+            try:
+                self.start_appointment_time = self.convert_to_datetime(self.start_appointment_time)
+            except ValueError as err:
+                raise TypeError(err)
+            
+        if "end_appointment_time" in config:
+            self.end_appointment_time = config["end_appointment_time"]
+
+            if not isinstance(self.end_appointment_time, str):
+                raise TypeError("'end_appointment_time' must be a string")
+            
+            try:
+                self.end_appointment_time = self.convert_to_datetime(self.end_appointment_time)
+            except ValueError as err:
+                raise TypeError(err)
+        
+        
