@@ -1,6 +1,19 @@
 # Configuration
 This guide contains all the information you need to configure `trusted-traveler-scheduler` to your specifications. An example file of the configuration can be found at [config.example.json](config.example.json).
 
+## Table of Contents
+
+- [Current Appointment Date](#current-appointment-date)
+- [Locations](#locations)
+- [Notifications](#notifications)
+  - [Notification Level](#notification-level)
+  - [Notification URLs](#notification-urls)
+  - [Test Notifications](#test-notifications)
+- [Retrieval Interval](#retrieval-interval)
+- [Appointment Times](#appointment-times)
+  - [Start Appointment Time](#start-appointment-time)
+  - [End Appointment Time](#end-appointment-time)
+
 ## Current Appointment Date
 
 Default: None
@@ -36,7 +49,7 @@ This represents the IDs of the enrollment centers you wish to monitor. This can 
 or
 
 ```json
-{  
+{
     "location_ids": 5140
 }
 ```
@@ -86,7 +99,7 @@ or
 ### Test Notifications
 To test your notification configuration, run the following command:
 ```shell
-python tty.py --test-notifications
+python tty.py -t
 ```
 
 ## Retrieval Interval
