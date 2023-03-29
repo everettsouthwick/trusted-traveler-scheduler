@@ -36,13 +36,16 @@ pip install -r requirements.txt
 To use the script, run the following command:
 ```shell
 python ttp.py [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] [-n NOTIFICATION_LEVEL] 
-    [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
+    [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL] [-s START_APPOINTMENT_TIME] 
+    [-e END_APPOINTMENT_TIME]
 ```
 All of the arguments are optional, and will take precedence over the values supplied in `config.json`, with the exception of `location_ids` and `notification_urls` which will merge the values into a single list.
 
-For example, the following command would retrieve appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 5 minutes:
+For example, the following command would retrieve appointments before December 31, 2023 for locations 5004 and 5140 and send notifications to the two Discord URLs every 5 minutes if the appointment time is between 8:00 AM and 8:00 PM:
 ```shell
-python ttp.py -d "December 31, 2023" -l 5004,5140 -n 1 -u discord://id/token,discord://id/token -r 5m
+python ttp.py -d "December 31, 2023" -l 5004,5140 -n 1 
+    -u discord://id/token,discord://id/token -r 5m -s 08:00
+    -e 20:00
 ```
 
 For complete documentation, you can use the following command:
@@ -71,7 +74,8 @@ Once you have pulled the image from docker, you may use the following command to
 
 ```shell
 docker run -d ecsouthwick/trusted-traveler-scheduler [-d CURRENT_APPOINTMENT_DATE] [-l LOCATION_IDS] 
-    [-n NOTIFICATION_LEVEL] [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL]
+    [-n NOTIFICATION_LEVEL] [-u NOTIFICATION_URLS] [-r RETRIEVAL_INTERVAL] [-s START_APPOINTMENT_TIME] 
+    [-e END_APPOINTMENT_TIME]
 ```
 Optionally, you may attach your `config.json` file to the container to utilize your configuration settings.
 

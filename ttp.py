@@ -9,7 +9,7 @@ from src.config import Config
 from src.main import main
 from src.schedule_retriever import ScheduleRetriever
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 def add_arguments(parser: argparse.ArgumentParser):
     parser.add_argument('-v', '--version',
@@ -41,6 +41,14 @@ def add_arguments(parser: argparse.ArgumentParser):
                         type=str,
                         help='Retrieval interval in specified unit (e.g. 5m)')
     
+    parser.add_argument('-s', '--start-appointment-time',
+                        type=str,
+                        help='The earliest appointment time you would like to be notified for in HH:MM format (e.g. 08:00)')
+    
+    parser.add_argument('-e', '--end-appointment-time',
+                        type=str,
+                        help='The latest appointment time you would like to be notified for in in HH:MM format (e.g. 17:00)')
+    
 def config_from_arguments(args):
     if args.current_appointment_date:
         config.current_appointment_date = datetime.strptime(args.current_appointment_date, '%B %d, %Y')
@@ -63,6 +71,18 @@ def config_from_arguments(args):
     if args.retrieval_interval:
         try:
             config.retrieval_interval = config.convert_to_seconds(args.retrieval_interval)
+        except ValueError as err:
+                raise TypeError(err)
+        
+    if args.start_appointment_time:
+        try:
+            config.start_appointment_time = config.convert_to_datetime(args.start_appointment_time)
+        except ValueError as err:
+                raise TypeError(err)
+        
+    if args.end_appointment_time:
+        try:
+            config.end_appointment_time = config.convert_to_datetime(args.end_appointment_time)
         except ValueError as err:
                 raise TypeError(err)
 
