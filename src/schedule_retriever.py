@@ -26,13 +26,22 @@ class ScheduleRetriever:
 
         for dates in schedule:
             if dates.appointment_date.date() == parsed_date.date():
-                dates.appointment_times.append(parsed_date)
+                if self._is_acceptable_appointment(parsed_date):
+                    dates.appointment_times.append(parsed_date)
                 return schedule
         
-        if self.config.current_appointment_date is None or self.config.current_appointment_date > parsed_date:
+        if self._is_acceptable_appointment(parsed_date):
             schedule.append(Schedule(parsed_date, [parsed_date]))
 
         return schedule
+    
+    def _is_acceptable_appointment(self, parsed_date: datetime) -> bool:
+        if self.config.current_appointment_date is None or self.config.current_appointment_date > parsed_date:
+            if self.config.start_appointment_time is None or self.config.start_appointment_time.time() <= parsed_date.time():
+                if self.config.end_appointment_time is None or self.config.end_appointment_time.time() >= parsed_date.time():
+                    return True
+
+        return False
 
     def _get_schedule(self, location_id: int) -> None:
         try:

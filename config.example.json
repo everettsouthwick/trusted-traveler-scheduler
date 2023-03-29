@@ -3,5 +3,7 @@
   "location_ids": [ 5140 ],
   "notification_level": 1,
   "notification_urls": [ "discord://id/token" ],
-  "retrieval_interval": "5m"
+  "retrieval_interval": "5m",
+  "start_appointment_time": "00:00",
+  "end_appointment_time": "23:59"
 }

@@ -102,5 +102,35 @@ This indicates how often the script will fetch new appointments from the monitor
 }
 ```
 
+## Appointment Times
+
+### Start Appointment Time
+Default: 00:00
+
+Type: String
+
+This indicates the earliest appointment you would like to be notified for. To be notified for all appointments, set this to "00:00".
+
+```json
+{
+    "start_appointment_time": "06:00"
+}
+```
+
+### End Appointment Time
+Default: 23:59
+
+Type: String
+
+This indicates the latest appointment you would like to be notified for. To be notified for all appointments, set this to "23:59".
+
+```json
+{
+    "end_appointment_time": "20:00"
+}
+```
+
+
+
 [0]: https://github.com/caronc/apprise
 [1]: https://github.com/caronc/apprise#supported-notifications
