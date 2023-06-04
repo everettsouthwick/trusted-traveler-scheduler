@@ -1,4 +1,5 @@
 import time
+import sqlite3
 
 from typing import List
 
@@ -10,41 +11,98 @@ from datetime import datetime
 
 from .config import Config
 
-GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=250&locationId={0}&minimum=1'
+GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=500&locationId={0}&minimum=1'
 
 class ScheduleRetriever:
     """
-    Retrieve schedule based on the location id provided.
+    A class for retrieving schedules for a given location ID and evaluating available appointment times.
     """
 
     def __init__(self, config: Config) -> None:
         self.config = config
         self.notification_handler = NotificationHandler(self)
 
-    def _evaluate_timestamp(self, schedule: List[Schedule], timestamp: str):
+    def _evaluate_timestamp(self, schedule: List[Schedule], location_id: int, timestamp: str) -> List[Schedule]:
+        """
+        Evaluates the given timestamp against the provided schedule and location ID. If the timestamp is within the
+        acceptable range specified in the configuration, it is added to the schedule.
+
+        :param schedule: The current schedule to evaluate the timestamp against.
+        :type schedule: List[Schedule]
+        :param location_id: The ID of the location to evaluate the timestamp for.
+        :type location_id: int
+        :param timestamp: The timestamp to evaluate.
+        :type timestamp: str
+        :return: The updated schedule.
+        :rtype: List[Schedule]
+        """
         parsed_date = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M')
 
         for dates in schedule:
             if dates.appointment_date.date() == parsed_date.date():
-                if self._is_acceptable_appointment(parsed_date):
+                if self._is_acceptable_appointment(location_id, parsed_date):
                     dates.appointment_times.append(parsed_date)
                 return schedule
         
-        if self._is_acceptable_appointment(parsed_date):
+        if self._is_acceptable_appointment(location_id, parsed_date):
             schedule.append(Schedule(parsed_date, [parsed_date]))
 
-        return schedule
+        return schedule 
     
-    def _is_acceptable_appointment(self, parsed_date: datetime) -> bool:
+    def _is_acceptable_appointment(self, location_id: int, parsed_date: datetime) -> bool:
+        """
+        Determines if the given appointment time is acceptable based on the configuration settings and existing
+        appointments in the database.
+
+        :param location_id: The ID of the location to check the appointment time for.
+        :type location_id: int
+        :param parsed_date: The parsed datetime object representing the appointment time.
+        :type parsed_date: datetime
+        :return: True if the appointment time is acceptable, False otherwise.
+        :rtype: bool
+        """
         if self.config.current_appointment_date is None or self.config.current_appointment_date > parsed_date:
             if self.config.start_appointment_time is None or self.config.start_appointment_time.time() <= parsed_date.time():
                 if self.config.end_appointment_time is None or self.config.end_appointment_time.time() >= parsed_date.time():
-                    return True
+                    conn = sqlite3.connect('ttp.db')
+
+                    cursor = conn.cursor()
+
+                    # Check if there is an existing appointment with the same location ID and timestamp
+                    cursor.execute('''SELECT COUNT(*) FROM appointments
+                                    WHERE location_id = ? AND start_time = ?''',
+                                (location_id, parsed_date.isoformat()))
+
+                    count = cursor.fetchone()[0]
+
+                    if count > 0:
+                        conn.close()
+
+                        return False
+                    else:
+                        cursor.execute('''INSERT INTO appointments (location_id, start_time)
+                                        VALUES (?, ?)''',
+                                    (location_id, parsed_date.isoformat()))
+
+                        conn.commit()
+
+                        conn.close()
+
+                        return True
 
         return False
 
     def _get_schedule(self, location_id: int) -> None:
+        """
+        Retrieves the schedule for the given location ID and evaluates the available appointment times. If there are
+        any new appointments that meet the criteria specified in the configuration, a notification is sent.
+
+        :param location_id: The ID of the location to retrieve the schedule for.
+        :type location_id: int
+        :return: None
+        """
         try:
+            time.sleep(1)
             appointments = requests.get(GOES_URL_FORMAT.format(location_id)).json()
 
             if not appointments:
@@ -53,7 +111,7 @@ class ScheduleRetriever:
             schedule = []
             for appointment in appointments:
                 if appointment['active']:
-                    schedule = self._evaluate_timestamp(schedule, appointment['startTimestamp'])
+                    schedule = self._evaluate_timestamp(schedule, location_id, appointment['startTimestamp'])
 
             if not schedule:
                 return
@@ -64,17 +122,28 @@ class ScheduleRetriever:
             return
         
     def monitor_location(self, location_id: int) -> None:
-            if self.config.retrieval_interval == 0:
-                self._get_schedule(location_id)
-                return
+        """
+        Monitors the given location ID for available appointment times. If the retrieval interval is set to 0, the
+        schedule is retrieved once and the method returns. Otherwise, the method continuously retrieves the schedule
+        at the specified interval until the program is terminated.
 
-            while True:
-                time_before = datetime.utcnow()
+        :param location_id: The ID of the location to monitor.
+        :type location_id: int
+        :return: None
+        """
+        if self.config.retrieval_interval == 0:
+            self._get_schedule(location_id)
+            return
 
-                self._get_schedule(location_id)
+        while True:
+            time_before = datetime.utcnow()
 
-                # Account for the time it takes to retrieve the location when
-                # deciding how long to sleep
-                time_after = datetime.utcnow()
-                time_taken = (time_after - time_before).total_seconds()
-                time.sleep(self.config.retrieval_interval - time_taken)
+            self._get_schedule(location_id)
+
+            # Account for the time it takes to retrieve the location when
+            # deciding how long to sleep
+            time_after = datetime.utcnow()
+            time_taken = (time_after - time_before).total_seconds()
+            time_to_sleep = self.config.retrieval_interval - time_taken
+            if time_to_sleep > 0:
+                time.sleep(time_to_sleep)
