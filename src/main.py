@@ -5,6 +5,10 @@ from .config import Config
 from multiprocessing import Process
 
 def create_database(filename: str) -> None:
+    """
+    Creates a new SQLite database file with the given filename if it does not already exist,
+    and creates a table named 'appointments' with columns 'id', 'location_id', and 'start_time'.
+    """
     conn = sqlite3.connect(filename)
 
     cursor = conn.cursor()
@@ -19,6 +23,10 @@ def create_database(filename: str) -> None:
     conn.close()
 
 def set_up(config: Config) -> None:
+    """
+    Sets up the scheduler by creating a ScheduleRetriever for each location ID in the given config,
+    and starting a separate process to monitor each location in parallel.
+    """
     # pylint:disable=import-outside-toplevel
     from .schedule_retriever import ScheduleRetriever
 
@@ -33,5 +41,12 @@ def set_up(config: Config) -> None:
         process.start()
 
 def main(config: Config) -> None:
+    """
+    Entry point for the Trusted Traveler Scheduler application. Creates a new SQLite database file
+    named 'ttp.db' if it does not already exist, and sets up the scheduler by creating a ScheduleRetriever
+    for each location ID in the given config, and starting a separate process to monitor each location in parallel.
+
+    :param config: A Config object containing the configuration for the scheduler.
+    """
     create_database('ttp.db')
     set_up(config)
