@@ -79,6 +79,6 @@ class NotificationHandler:
                 if len(appointment.appointment_times) > 3:
                     times += f', and {len(appointment.appointment_times) - 3} more'
 
-                appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%A, %B %d, %Y')} [{times}]\n"
+                appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%a, %B %d, %Y')} [{times}]\n"
 
         self.send_notification(appointment_message, NotificationLevel.INFO)
