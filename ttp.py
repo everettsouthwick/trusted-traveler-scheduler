@@ -9,7 +9,7 @@ from src.config import Config
 from src.main import main
 from src.schedule_retriever import ScheduleRetriever
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 def add_arguments(parser: argparse.ArgumentParser):
     parser.add_argument('-v', '--version',

@@ -22,10 +22,27 @@ class NotificationHandler:
         self.locations = self.schedule_retriever.config.locations
 
     def _get_location_name(self, location_id: int) -> str:
+        """
+        Returns the name of the location with the given ID.
+
+        Args:
+            location_id (int): The ID of the location.
+
+        Returns:
+            str: The name of the location with the given ID, or an empty string if no location was found.
+        """
         result = next((location for location in self.locations if location["id"] == location_id), None)
         return result['name'] if result else ''
 
     def send_notification(self, body: str, level: int = 1) -> None:
+        """
+        Sends a notification to the user via Apprise or the console, depending on the configuration.
+
+        Args:
+            body (str): The message to send.
+            level (int, optional): The level of the notification. If the level is less than the configured notification
+                level, the notification will not be sent. Defaults to 1.
+        """
         print(body)
 
         # Check the level to see if we still want to send it. If level is none, it means
@@ -39,6 +56,16 @@ class NotificationHandler:
         apobj.notify(title=title, body=body, body_format=apprise.NotifyFormat.TEXT)
 
     def new_appointment(self, location_id: int, appointments: List[Schedule]) -> None:
+        """
+        Sends a notification to the user if new appointments are available for the given location.
+
+        Args:
+            location_id (int): The ID of the location.
+            appointments (List[Schedule]): A list of Schedule objects representing the new appointments.
+
+        Returns:
+            None
+        """
         # Don't send notifications if no appointments are available
         if len(appointments) == 0:
             return
@@ -52,6 +79,6 @@ class NotificationHandler:
                 if len(appointment.appointment_times) > 3:
                     times += f', and {len(appointment.appointment_times) - 3} more'
 
-                appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%A, %B %d, %Y')} [{times}]\n"
+                appointment_message += f"- {datetime.strftime(appointment.appointment_date, '%a, %B %d, %Y')} [{times}]\n"
 
         self.send_notification(appointment_message, NotificationLevel.INFO)

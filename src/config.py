@@ -11,6 +11,9 @@ CONFIG_FILE_NAME = "config.json"
 LOCATION_FILE_NAME = "locations.json"
 
 class Config:
+    """
+    A class representing the configuration for the Trusted Traveler Scheduler application.
+    """
     def __init__(self):
         # Default values are set
         self.current_appointment_date = None
@@ -34,6 +37,12 @@ class Config:
             sys.exit()
 
     def _get_config(self) -> Dict[str, Any]:
+        """
+        Reads the configuration file and returns its contents as a dictionary.
+
+        Returns:
+            A dictionary containing the configuration values.
+        """
         project_dir = os.path.dirname(os.path.dirname(__file__))
         config_file = project_dir + "/" + CONFIG_FILE_NAME
 
@@ -46,7 +55,13 @@ class Config:
 
         return config
     
-    def _get_locations(self):
+    def _get_locations(self) -> Dict[str, Any]:
+        """
+        Reads the locations file and returns its contents as a dictionary.
+
+        Returns:
+            A dictionary containing the locations.
+        """
         project_dir = os.path.dirname(os.path.dirname(__file__))
         locations_file = project_dir + "/utils/" + LOCATION_FILE_NAME
 
@@ -59,37 +74,19 @@ class Config:
 
         return locations
     
-    def convert_to_seconds(self, time: str) -> int:
-        # If the time is already an integer, return it
-        try:
-            return int(time)
-        except:
-            pass
-
-        match = re.match(r'^(\d+)([smhd])$', time.lower())
-        
-        if not match:
-            raise ValueError(f"'retrieval_interval' must be in the format of <integer><unit>. (e.g. 45s (seconds), 30m (minutes), 2h (hours), 1d (days))")
-        
-        value, unit = int(match.group(1)), match.group(2)
-
-        if unit == "s":
-            return value
-        elif unit == "m":
-            return value * 60
-        elif unit == "h":
-            return value * 3600
-        elif unit == "d":
-            return value * 86400
-        else:
-            raise ValueError(f"'retrieval_interval' invalid time unit: {unit}. Accepted units: s (seconds), m (minutes), h (hours), d (days).")
-        
-    def convert_to_datetime(self, time: str) -> datetime:
-        return datetime.strptime(time, "%H:%M")
-
     # This method ensures the configuration values are correct and the right types.
     # Defaults are already set in the constructor to ensure a value is never null.
     def _parse_config(self, config: Dict[str, Any]) -> None:
+        """
+        Parses the configuration dictionary and sets the corresponding attributes of the Config object.
+
+        Args:
+            config: A dictionary containing the configuration values.
+
+        Raises:
+            TypeError: If any of the configuration values are of the wrong type.
+            ValueError: If any of the configuration values are invalid.
+        """
         if "current_appointment_date" in config and config["current_appointment_date"] != "":
             self.current_appointment_date = config["current_appointment_date"]
 
@@ -148,5 +145,57 @@ class Config:
                 self.end_appointment_time = self.convert_to_datetime(self.end_appointment_time)
             except ValueError as err:
                 raise TypeError(err)
+    
+    def convert_to_seconds(self, time: str) -> int:
+        """
+        Converts a time string to seconds.
+
+        Args:
+            time: A string representing a time interval in the format of <integer><unit>. (e.g. 45s (seconds), 30m (minutes), 2h (hours), 1d (days))
+
+        Returns:
+            An integer representing the time interval in seconds.
+
+        Raises:
+            ValueError: If the time string is not in the correct format or contains an invalid time unit.
+        """
+        # If the time is already an integer, return it
+        try:
+            return int(time)
+        except:
+            pass
+
+        match = re.match(r'^(\d+)([smhd])$', time.lower())
+        
+        if not match:
+            raise ValueError(f"'retrieval_interval' must be in the format of <integer><unit>. (e.g. 45s (seconds), 30m (minutes), 2h (hours), 1d (days))")
+        
+        value, unit = int(match.group(1)), match.group(2)
+
+        if unit == "s":
+            return value
+        elif unit == "m":
+            return value * 60
+        elif unit == "h":
+            return value * 3600
+        elif unit == "d":
+            return value * 86400
+        else:
+            raise ValueError(f"'retrieval_interval' invalid time unit: {unit}. Accepted units: s (seconds), m (minutes), h (hours), d (days).")
+        
+    def convert_to_datetime(self, time: str) -> datetime:
+        """
+        Converts a time string to a datetime object.
+
+        Args:
+            time: A string representing a time in the format of HH:MM.
+
+        Returns:
+            A datetime object representing the time.
+
+        Raises:
+            ValueError: If the time string is not in the correct format.
+        """
+        return datetime.strptime(time, "%H:%M")
         
         
