@@ -80,7 +80,7 @@ docker run -d ecsouthwick/trusted-traveler-scheduler [-d CURRENT_APPOINTMENT_DAT
 Optionally, you may attach your `config.json` file to the container to utilize your configuration settings.
 
 ```shell
-docker run -d --name trusted-traveler-scheduler --volume /path/to/config.json:/app/config.json ecsouthwick/trusted-traveler-scheduler
+docker run -d --name ttp --volume /path/to/config.json:/app/config.json ecsouthwick/trusted-traveler-scheduler
 ```
 
 **Note**: The recommended restart policy for the container is `on-failed` or `no`.
