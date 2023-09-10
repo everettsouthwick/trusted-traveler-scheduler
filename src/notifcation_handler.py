@@ -53,7 +53,14 @@ class NotificationHandler:
         title = "Trusted Traveler Scheduler"
 
         apobj = apprise.Apprise(self.notification_urls)
-        apobj.notify(title=title, body=body, body_format=apprise.NotifyFormat.TEXT)
+        result = apobj.notify(title=title, body=body, body_format=apprise.NotifyFormat.TEXT)
+
+        # If you encounter Apprise errors, https://github.com/caronc/apprise/wiki/Development_LogCapture
+        # may be useful.
+        if result is None:
+            print('error: No notifications sent (configuration error)')
+        elif result is False:
+            print('error: At least 1 notification failed to send')
 
     def new_appointment(self, location_id: int, appointments: List[Schedule]) -> None:
         """
