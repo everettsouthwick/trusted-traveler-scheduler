@@ -111,19 +111,14 @@ class ScheduleRetriever:
         return False
 
     def _clear_database_of_claimed_appointments(
-        self, location_id: int, schedule: List[Schedule]
+        self, location_id: int, all_active_appointments: List
     ) -> None:
         """
         Clears the database of any appointments that have been claimed.
 
         :return: None
         """
-        active_appointment_times = []
-        for dates in schedule:
-            for appointment_time in dates.appointment_times:
-                active_appointment_times.append(appointment_time.isoformat())
-
-        if not active_appointment_times:
+        if not all_active_appointments:
             return
 
         conn = sqlite3.connect("ttp.db")
@@ -131,11 +126,12 @@ class ScheduleRetriever:
 
         cursor.execute(
             f"""DELETE FROM appointments
-                        WHERE location_id = ? AND start_time NOT IN ({",".join(['?'] * len(active_appointment_times))})""",
-            [location_id] + active_appointment_times,
+                        WHERE location_id = ? AND start_time NOT IN ({",".join(['?'] * len(all_active_appointments))})""",
+            [location_id] + all_active_appointments,
         )
 
-        print(f"Cleared {cursor.rowcount} appointments no longer available from the database")
+        if cursor.rowcount > 0:
+            print(f"Removed {cursor.rowcount} appointments that have been claimed for location {location_id}.\n")
 
         conn.commit()
         conn.close()
@@ -159,17 +155,21 @@ class ScheduleRetriever:
                 return
 
             schedule = []
+            all_active_appointments = []
             for appointment in appointments:
                 if appointment["active"]:
                     schedule = self._evaluate_timestamp(
                         schedule, location_id, appointment["startTimestamp"]
                     )
+                    all_active_appointments.append(datetime.strptime(appointment["startTimestamp"], "%Y-%m-%dT%H:%M").isoformat())
+
+            self._clear_database_of_claimed_appointments(location_id, all_active_appointments)
 
             if not schedule:
                 return
 
             self.notification_handler.new_appointment(location_id, schedule)
-            self._clear_database_of_claimed_appointments(location_id, schedule)
+            
 
         except OSError:
             return
