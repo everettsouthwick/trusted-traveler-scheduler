@@ -11,7 +11,8 @@ from datetime import datetime
 
 from .config import Config
 
-GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=500&locationId={0}&minimum=1'
+GOES_URL_FORMAT = "https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=500&locationId={0}&minimum=1"
+
 
 class ScheduleRetriever:
     """
@@ -22,7 +23,9 @@ class ScheduleRetriever:
         self.config = config
         self.notification_handler = NotificationHandler(self)
 
-    def _evaluate_timestamp(self, schedule: List[Schedule], location_id: int, timestamp: str) -> List[Schedule]:
+    def _evaluate_timestamp(
+        self, schedule: List[Schedule], location_id: int, timestamp: str
+    ) -> List[Schedule]:
         """
         Evaluates the given timestamp against the provided schedule and location ID. If the timestamp is within the
         acceptable range specified in the configuration, it is added to the schedule.
@@ -36,20 +39,22 @@ class ScheduleRetriever:
         :return: The updated schedule.
         :rtype: List[Schedule]
         """
-        parsed_date = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M')
+        parsed_date = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M")
 
         for dates in schedule:
             if dates.appointment_date.date() == parsed_date.date():
                 if self._is_acceptable_appointment(location_id, parsed_date):
                     dates.appointment_times.append(parsed_date)
                 return schedule
-        
+
         if self._is_acceptable_appointment(location_id, parsed_date):
             schedule.append(Schedule(parsed_date, [parsed_date]))
 
-        return schedule 
-    
-    def _is_acceptable_appointment(self, location_id: int, parsed_date: datetime) -> bool:
+        return schedule
+
+    def _is_acceptable_appointment(
+        self, location_id: int, parsed_date: datetime
+    ) -> bool:
         """
         Determines if the given appointment time is acceptable based on the configuration settings and existing
         appointments in the database.
@@ -61,17 +66,28 @@ class ScheduleRetriever:
         :return: True if the appointment time is acceptable, False otherwise.
         :rtype: bool
         """
-        if self.config.current_appointment_date is None or self.config.current_appointment_date > parsed_date:
-            if self.config.start_appointment_time is None or self.config.start_appointment_time.time() <= parsed_date.time():
-                if self.config.end_appointment_time is None or self.config.end_appointment_time.time() >= parsed_date.time():
-                    conn = sqlite3.connect('ttp.db')
+        if (
+            self.config.current_appointment_date is None
+            or self.config.current_appointment_date > parsed_date
+        ):
+            if (
+                self.config.start_appointment_time is None
+                or self.config.start_appointment_time.time() <= parsed_date.time()
+            ):
+                if (
+                    self.config.end_appointment_time is None
+                    or self.config.end_appointment_time.time() >= parsed_date.time()
+                ):
+                    conn = sqlite3.connect("ttp.db")
 
                     cursor = conn.cursor()
 
                     # Check if there is an existing appointment with the same location ID and timestamp
-                    cursor.execute('''SELECT COUNT(*) FROM appointments
-                                    WHERE location_id = ? AND start_time = ?''',
-                                (location_id, parsed_date.isoformat()))
+                    cursor.execute(
+                        """SELECT COUNT(*) FROM appointments
+                                    WHERE location_id = ? AND start_time = ?""",
+                        (location_id, parsed_date.isoformat()),
+                    )
 
                     count = cursor.fetchone()[0]
 
@@ -79,18 +95,50 @@ class ScheduleRetriever:
                         conn.close()
 
                         return False
-                    else:
-                        cursor.execute('''INSERT INTO appointments (location_id, start_time)
-                                        VALUES (?, ?)''',
-                                    (location_id, parsed_date.isoformat()))
 
-                        conn.commit()
+                    cursor.execute(
+                        """INSERT INTO appointments (location_id, start_time)
+                                    VALUES (?, ?)""",
+                        (location_id, parsed_date.isoformat()),
+                    )
 
-                        conn.close()
+                    conn.commit()
 
-                        return True
+                    conn.close()
+
+                    return True
 
         return False
+
+    def _clear_database_of_claimed_appointments(
+        self, location_id: int, schedule: List[Schedule]
+    ) -> None:
+        """
+        Clears the database of any appointments that have been claimed.
+
+        :return: None
+        """
+        active_appointment_times = []
+        for dates in schedule:
+            for appointment_time in dates.appointment_times:
+                active_appointment_times.append(appointment_time.isoformat())
+
+        if not active_appointment_times:
+            return
+
+        conn = sqlite3.connect("ttp.db")
+        cursor = conn.cursor()
+
+        cursor.execute(
+            f"""DELETE FROM appointments
+                        WHERE location_id = ? AND start_time NOT IN ({",".join(['?'] * len(active_appointment_times))})""",
+            [location_id] + active_appointment_times,
+        )
+
+        print(f"Cleared {cursor.rowcount} appointments no longer available from the database")
+
+        conn.commit()
+        conn.close()
 
     def _get_schedule(self, location_id: int) -> None:
         """
@@ -103,24 +151,29 @@ class ScheduleRetriever:
         """
         try:
             time.sleep(1)
-            appointments = requests.get(GOES_URL_FORMAT.format(location_id)).json()
+            appointments = requests.get(
+                GOES_URL_FORMAT.format(location_id), timeout=30
+            ).json()
 
             if not appointments:
                 return
-            
+
             schedule = []
             for appointment in appointments:
-                if appointment['active']:
-                    schedule = self._evaluate_timestamp(schedule, location_id, appointment['startTimestamp'])
+                if appointment["active"]:
+                    schedule = self._evaluate_timestamp(
+                        schedule, location_id, appointment["startTimestamp"]
+                    )
 
             if not schedule:
                 return
-            
+
             self.notification_handler.new_appointment(location_id, schedule)
-            
+            self._clear_database_of_claimed_appointments(location_id, schedule)
+
         except OSError:
             return
-        
+
     def monitor_location(self, location_id: int) -> None:
         """
         Monitors the given location ID for available appointment times. If the retrieval interval is set to 0, the
