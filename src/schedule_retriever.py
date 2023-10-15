@@ -152,8 +152,9 @@ class ScheduleRetriever:
             ).json()
 
             if not appointments:
+                print(f"No active appointments available for location {location_id}.")
                 return
-
+            
             schedule = []
             all_active_appointments = []
             for appointment in appointments:
