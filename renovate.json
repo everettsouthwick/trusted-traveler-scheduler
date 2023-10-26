@@ -1,19 +1,9 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:base"
-    ],
-    "packageRules": [
-        {
-            "automerge": true,
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "minimumReleaseAge": "3 days"
-        }
+        "config:recommended",
+        ":automergeStableNonMajor",
+        "schedule:nonOfficeHours"
     ],
     "baseBranches": [
         "develop"
