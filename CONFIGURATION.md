@@ -99,7 +99,7 @@ or
 ### Test Notifications
 To test your notification configuration, run the following command:
 ```shell
-python tty.py -t
+python ttp.py -t
 ```
 
 ## Retrieval Interval
