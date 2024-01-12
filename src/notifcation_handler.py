@@ -43,7 +43,7 @@ class NotificationHandler:
             level (int, optional): The level of the notification. If the level is less than the configured notification
                 level, the notification will not be sent. Defaults to 1.
         """
-        print(body)
+        print(f"{datetime.today():%Y/%m/%d %H:%M:%S}: {body}\n")
 
         # Check the level to see if we still want to send it. If level is none, it means
         # the message will always be printed. For example, this is used when testing notifications.
