@@ -58,9 +58,9 @@ class NotificationHandler:
         # If you encounter Apprise errors, https://github.com/caronc/apprise/wiki/Development_LogCapture
         # may be useful.
         if result is None:
-            print('error: No notifications sent (configuration error)')
+            print('{datetime.today():%Y/%m/%d %H:%M:%S}: error: No notifications sent (configuration error)')
         elif result is False:
-            print('error: At least 1 notification failed to send')
+            print('{datetime.today():%Y/%m/%d %H:%M:%S}: error: At least 1 notification failed to send')
 
     def new_appointment(self, location_id: int, appointments: List[Schedule]) -> None:
         """
