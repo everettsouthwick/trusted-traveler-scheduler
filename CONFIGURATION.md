@@ -42,7 +42,7 @@ This represents the IDs of the enrollment centers you wish to monitor. This can 
 
 ```json
 {
-  "location_ids": [ 5140 ]
+  "location_ids": [ 5140,5444 ]
 }
 ```
 
