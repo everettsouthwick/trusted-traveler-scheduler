@@ -131,7 +131,7 @@ class ScheduleRetriever:
         )
 
         if cursor.rowcount > 0:
-            print(f"Removed {cursor.rowcount} appointments that have been claimed for location {location_id}.\n")
+            print(f"{datetime.today():%Y/%m/%d %H:%M:%S}: Removed {cursor.rowcount} appointments that have been claimed for location {location_id}.\n")
 
         conn.commit()
         conn.close()
@@ -152,7 +152,7 @@ class ScheduleRetriever:
             ).json()
 
             if not appointments:
-                print(f"No active appointments available for location {location_id}.")
+                print(f"{datetime.today():%Y/%m/%d %H:%M:%S}: No active appointments available for location {location_id}.")
                 return
             
             schedule = []
