@@ -1,4 +1,5 @@
 import requests
+import json
 
 GOES_URL_FORMAT = 'https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true'
 
@@ -35,6 +36,11 @@ class Services:
             self.canada_fast = ':heavy_check_mark:'
         else:
             self.canada_fast = ':x:'
+
+class CompactEncoder(json.JSONEncoder):
+    def __init__(self, *args, **kwargs):
+        kwargs['separators'] = (',', ':')
+        super().__init__(*args, **kwargs)
 
 def determine_services(location):
     global_entry = False
@@ -78,12 +84,18 @@ def output_to_markdown(locations):
         f.write('[3]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Mexico%20FAST\n')
         f.write('[4]: https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true&serviceName=U.S.%20%2F%20Canada%20FAST\n')
 
+def output_to_json(locations):
+    with open('utils/locations.json', 'w', encoding='utf8') as json_file:
+        json.dump(locations, json_file, cls=CompactEncoder, indent=2)
+
 def get_locations():
         try:
             locations = requests.get(GOES_URL_FORMAT).json()
 
             if not locations:
                 return
+            
+            output_to_json(locations)
             
             enrollment_centers = []
             for location in locations:
