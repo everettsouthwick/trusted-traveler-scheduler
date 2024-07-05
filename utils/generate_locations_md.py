@@ -86,7 +86,7 @@ def output_to_markdown(locations):
 
 def output_to_json(locations):
     with open('utils/locations.json', 'w', encoding='utf8') as json_file:
-        json.dump(locations, json_file, cls=CompactEncoder, indent=2)
+        json.dump(locations, json_file, cls=CompactEncoder, indent=3)
 
 def get_locations():
         try:
