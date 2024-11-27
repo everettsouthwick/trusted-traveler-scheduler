@@ -2,6 +2,8 @@
 
 ![image](https://github.com/everettsouthwick/trusted-traveler-scheduler/assets/8216991/242646d9-6343-4919-a214-75b5b512d65a)
 
+👋 **Check out my AI project [Seren](https://getseren.com)!**
+
 This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
 
 ## Table of Contents
