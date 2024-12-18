@@ -1,2 +1,2 @@
-apprise==1.7.2
+apprise==1.9.1
 requests==2.31.0
