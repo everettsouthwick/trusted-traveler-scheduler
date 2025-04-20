@@ -1,6 +1,6 @@
 # Trusted Traveler Scheduler
 
-![image](https://github.com/everettsouthwick/trusted-traveler-scheduler/assets/8216991/242646d9-6343-4919-a214-75b5b512d65a)
+![Image](https://github.com/user-attachments/assets/a458f94f-6598-46c6-b217-86089c0333a0)
 
 👋 **Check out my AI project [Seren](https://getseren.com)!**
 
