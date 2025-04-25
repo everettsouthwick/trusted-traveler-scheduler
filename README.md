@@ -2,11 +2,17 @@
 
 ![Image](https://github.com/user-attachments/assets/a458f94f-6598-46c6-b217-86089c0333a0)
 
-👋 **Check out my AI project [Seren](https://getseren.com)!**
+## Cloud-Hosted Option
 
-This script will automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. You can use this to schedule Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you have configured offers the service.
+A hosted version of this tool is available at [www.goglobalentry.com](https://www.goglobalentry.com) if you prefer not to set up the script yourself.
+
+## Self-Hosted Option
+
+You can run this script locally to automatically fetch new appointment dates/times for the configured location(s) from the Trusted Traveler Program API. This works for Global Entry, NEXUS, SENTRI, or FAST appointments, provided the enrollment center you select offers the service.
 
 ## Table of Contents
+* [Cloud-Hosted Option](#cloud-hosted-option)
+* [Self-Hosted Option](#self-hosted-option)
 * [Installation](#installation)
     * [Prerequisites](#prerequisites)
 * [Usage](#usage)
