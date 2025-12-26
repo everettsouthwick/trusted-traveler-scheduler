@@ -115,3 +115,9 @@ For information on the list of applicable locations, see [LOCATIONS.md](LOCATION
 [3]: https://hub.docker.com/r/ecsouthwick/trusted-traveler-scheduler	"Docker repository"
 [4]: https://github.com/Drewster727	"Drewster727"
 [5]: https://github.com/jdholtz	"jdholtz"
+
+## More From Me
+
+* [Go Global Entry](https://www.goglobalentry.com) - Get instant alerts when Global Entry interview slots open
+* [Stepio](https://www.getstep.io) - Social step tracking app with group challenges
+* [southwick.dev](https://southwick.dev) - My developer portfolio
